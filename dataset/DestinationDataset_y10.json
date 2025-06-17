@@ -1,0 +1,17 @@
+{
+	"name": "DestinationDataset_y10",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "AzureSqlDatabase1",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "AzureSqlTable",
+		"schema": [],
+		"typeProperties": {
+			"schema": "dbo",
+			"table": "moviesDB2"
+		}
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}

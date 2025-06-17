@@ -1,0 +1,21 @@
+{
+	"name": "AzureSqlDatabase2",
+	"type": "Microsoft.DataFactory/factories/linkedservices",
+	"properties": {
+		"annotations": [],
+		"type": "AzureSqlDatabase",
+		"typeProperties": {
+			"server": "sqlserverdemo16062025.database.windows.net",
+			"database": "sqldbdemo162025",
+			"encrypt": "optional",
+			"trustServerCertificate": false,
+			"authenticationType": "SQL",
+			"userName": "sqladminlogin",
+			"encryptedCredential": "eyJDcmVkZW50aWFsSWQiOiI1YjEyNzcxMS00ZWU3LTQ1YjMtOTI4MS05ZGRmMTJhMjA4YWYiLCJWZXJzaW9uIjoiMi4wIiwiQ2xhc3NUeXBlIjoiTWljcm9zb2Z0LkRhdGFQcm94eS5Db3JlLkludGVyU2VydmljZURhdGFDb250cmFjdC5DcmVkZW50aWFsU1UwNkNZMTQifQ=="
+		},
+		"connectVia": {
+			"referenceName": "SelfHostedIR1",
+			"type": "IntegrationRuntimeReference"
+		}
+	}
+}

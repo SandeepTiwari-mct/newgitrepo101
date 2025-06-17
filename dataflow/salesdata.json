@@ -1,0 +1,123 @@
+{
+	"name": "salesdata",
+	"properties": {
+		"type": "MappingDataFlow",
+		"typeProperties": {
+			"sources": [
+				{
+					"dataset": {
+						"referenceName": "AzureSqlTable2",
+						"type": "DatasetReference"
+					},
+					"name": "source1"
+				},
+				{
+					"dataset": {
+						"referenceName": "AzureSqlTable3",
+						"type": "DatasetReference"
+					},
+					"name": "source2"
+				}
+			],
+			"sinks": [
+				{
+					"dataset": {
+						"referenceName": "DelimitedText2",
+						"type": "DatasetReference"
+					},
+					"name": "sink1"
+				}
+			],
+			"transformations": [
+				{
+					"name": "join1"
+				},
+				{
+					"name": "select1"
+				},
+				{
+					"name": "aggregate1"
+				},
+				{
+					"name": "filter1"
+				}
+			],
+			"scriptLines": [
+				"source(output(",
+				"          ProductKey as integer,",
+				"          OrderDateKey as integer,",
+				"          DueDateKey as integer,",
+				"          ShipDateKey as integer,",
+				"          CustomerKey as integer,",
+				"          PromotionKey as integer,",
+				"          DueDate as timestamp,",
+				"          ShipDate as timestamp,",
+				"          SalesAmount as decimal(19,4),",
+				"          TaxAmt as decimal(19,4),",
+				"          Freight as decimal(19,4),",
+				"          CarrierTrackingNumber as string,",
+				"          CustomerPONumber as string,",
+				"          OrderDate as timestamp,",
+				"          UnitPrice as decimal(19,4),",
+				"          ExtendedAmount as decimal(19,4),",
+				"          UnitPriceDiscountPct as double,",
+				"          DiscountAmount as double,",
+				"          ProductStandardCost as decimal(19,4),",
+				"          TotalProductCost as decimal(19,4),",
+				"          CurrencyKey as integer,",
+				"          SalesTerritoryKey as integer,",
+				"          SalesOrderNumber as string,",
+				"          SalesOrderLineNumber as integer,",
+				"          RevisionNumber as integer,",
+				"          OrderQuantity as integer",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     isolationLevel: 'READ_UNCOMMITTED',",
+				"     format: 'table') ~> source1",
+				"source(output(",
+				"          SalesTerritoryKey as integer,",
+				"          SalesTerritoryAlternateKey as integer,",
+				"          SalesTerritoryRegion as string,",
+				"          SalesTerritoryCountry as string,",
+				"          SalesTerritoryGroup as string,",
+				"          SalesTerritoryImage as binary",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     isolationLevel: 'READ_UNCOMMITTED',",
+				"     format: 'table') ~> source2",
+				"source1, source2 join(source1@SalesTerritoryKey == source2@SalesTerritoryKey,",
+				"     joinType:'inner',",
+				"     matchType:'exact',",
+				"     ignoreSpaces: false,",
+				"     broadcast: 'auto')~> join1",
+				"join1 select(mapColumn(",
+				"          ProductKey,",
+				"          SalesAmount,",
+				"          SalesTerritoryKey = source1@SalesTerritoryKey,",
+				"          SalesTerritoryKey = source2@SalesTerritoryKey,",
+				"          SalesTerritoryCountry",
+				"     ),",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true) ~> select1",
+				"select1 aggregate(groupBy(SalesTerritoryCountry,",
+				"          ProductKey,",
+				"          SalesTerritoryKey),",
+				"     SalesAmount = sum(toInteger(SalesAmount))) ~> aggregate1",
+				"aggregate1 filter(toInteger(SalesTerritoryKey)==4) ~> filter1",
+				"filter1 sink(allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     input(",
+				"          movies as string,",
+				"          Title as string,",
+				"          genresgenregenre as string,",
+				"          YEAR as string,",
+				"          Rating as string",
+				"     ),",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true) ~> sink1"
+			]
+		}
+	}
+}

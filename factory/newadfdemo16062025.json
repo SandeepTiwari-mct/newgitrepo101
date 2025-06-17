@@ -1,0 +1,9 @@
+{
+	"name": "newadfdemo16062025",
+	"location": "southindia",
+	"identity": {
+		"type": "SystemAssigned",
+		"principalId": "81780fdf-f8ba-4cd7-967c-58b36d18d67f",
+		"tenantId": "4d32e553-f901-4ce3-a83f-4c55630d0f9d"
+	}
+}
