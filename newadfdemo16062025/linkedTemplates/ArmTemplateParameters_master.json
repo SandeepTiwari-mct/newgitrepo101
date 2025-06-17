@@ -35,6 +35,9 @@
 		"AzureSqlDatabase6_password": {
 			"value": ""
 		},
+		"AzureSqlDatabase7_password": {
+			"value": ""
+		},
 		"SqlServer1_password": {
 			"value": ""
 		},
@@ -90,6 +93,15 @@
 			"value": "sqldbdemo162025"
 		},
 		"AzureSqlDatabase6_properties_typeProperties_userName": {
+			"value": "sqladminlogin"
+		},
+		"AzureSqlDatabase7_properties_typeProperties_server": {
+			"value": "sqlserverdemo16062025.database.windows.net"
+		},
+		"AzureSqlDatabase7_properties_typeProperties_database": {
+			"value": "newcdcdbd"
+		},
+		"AzureSqlDatabase7_properties_typeProperties_userName": {
 			"value": "sqladminlogin"
 		},
 		"SqlServer1_properties_typeProperties_server": {
